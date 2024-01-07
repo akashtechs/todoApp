@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="mb-4">
+
+    <h2 class="h1-responsive font-weight-bold text-center my-4">To Do App</h2>
+    <p class="text-center w-responsive mx-auto mb-5">Our Project in 2024.</p>
+
+    <div class="row col-md-10 mx-auto">
+
+        <div class="mr-auto">
+            <form id="contact-form" name="contact-form" action="/add-project" method="POST">
+                {% csrf_token %}
+                <div class="row mt-5">
+
+                    <div class="col-md-3">
+                        <div class="md-form mb-0">
+                            <label for="date" class="">Date</label>
+                            <input type="date" id="date" name="date" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form mb-0">
+                            <label for="dev" class="">Developer Name</label>
+                            <input type="text" id="dev" name="dev" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form mb-0">
+                            <label for="name" class="">Project Name</label>
+                            <input type="text" id="name" name="name" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form mb-0">
+                            <label for="prodiscription" class="">Project Discription</label>
+                            <input type="text" id="prodiscription" name="prodiscription" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center text-md-left mt-5">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+
+            </form>
+
+            <table class="table mt-5 table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Date</th>
+                        <th class="col-md-2">First</th>
+                        <th class="col-md-2">Last</th>
+                        <th class="col-md-2">Handle</th>
+                        <th class="col-md-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                    <tr>
+                        <td class="col-md-2">{{project.date}}</td>
+                        <td class="col-md-2">{{project.dev_name}}</td>
+                        <td class="col-md-2">{{project.pro_name}}</td>
+                        <td class="col-md-2">{{project.pro_discription}}</td>
+                        <td class="col-md-2 mr-auto">
+                            <a href="/open-to-do/{{project.id}}" type="button" class="btn btn-primary">Update</a>
+                            <a href="/delete_to_do/{{project.id}}" type="button" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
