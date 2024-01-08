@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from todo.models import ToDos
+from .models import ToDos
 
 
 def home(request):
@@ -16,7 +16,7 @@ def add_data(request):
             todo.date = request.POST.get('date')
             todo.dev_name = request.POST.get('dev')
             todo.pro_name = request.POST.get('name')
-            todo.pro_discription = request.POST.get('prodiscription')
+            todo.pro_description = request.POST.get('pro-description')
             todo.save()
 
     return redirect('/home')
@@ -33,7 +33,7 @@ def update_to_do(request, id):
         project.date = request.POST.get('date')
         project.dev_name = request.POST.get('dev')
         project.pro_name = request.POST.get('name')
-        project.pro_discription = request.POST.get('prodiscription')
+        project.pro_description = request.POST.get('pro-description')
         project.save()
 
     return redirect('/home')
