@@ -7,5 +7,7 @@ urlpatterns = [
     path('delete_to_do/<int:id>', views.delete_to_do, name="delete_to_do"),
     path('open-to-do/<int:id>', views.open_to_do, name="open_to_do"),
     path('update-to-do/<int:id>', views.update_to_do, name="update_to_do"),
+    path('media/documents/<str:path>', views.download, name="download"),
+
 ]
 

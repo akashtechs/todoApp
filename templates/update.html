@@ -6,35 +6,49 @@
     <h2 class="h1-responsive font-weight-bold text-center my-4">To Do App</h2>
     <p class="text-center w-responsive mx-auto mb-5">Our Project in 2024.</p>
 
-    <div class="row col-md-10 mx-auto">
+    <div class="row col-md-12 mx-auto">
 
         <div class="mr-auto">
-            <form id="contact-form" name="contact-form" action="/update-to-do/{{project.id}}" method="POST">
+            <form id="contact-form" name="contact-form" action="/update-to-do/{{project.pro_id}}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row mt-5">
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="date" class="">Date</label>
                             <input type="text" id="date" name="date" class="form-control" value="{{project.date}}">
                         </div>
                     </div>
+                    
+                    <div class="col-md-2">
+                        <div class="md-form mb-0">
+                            <label for="my-file" class="">Project File</label>
+                            <input type="file" id="my-file" name="file" class="form-control" multiple>
+                        </div>
+                    </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <div class="md-form mb-0">
+                            <label for="pro-type" class="">Project Type</label>
+                            <input type="text" id="pro-type" name="pro-type" class="form-control", value="{{project.pro_type}}">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="dev" class="">Developer Name</label>
                             <input type="text" id="dev" name="dev" class="form-control", value="{{project.dev_name}}">
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="name" class="">Project Name</label>
                             <input type="text" id="name" name="name" class="form-control" value="{{project.pro_name}}">
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="pro-description" class="">Project Description</label>
                             <input type="text" id="pro-description" name="pro-description" class="form-control" value="{{project.pro_description}}">

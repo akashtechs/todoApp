@@ -6,41 +6,59 @@
     <h2 class="h1-responsive font-weight-bold text-center my-4">To Do App</h2>
     <p class="text-center w-responsive mx-auto mb-5">Our Project in 2024.</p>
 
-    <div class="row col-md-10 mx-auto">
+    <div class="row col-md-12 mx-auto">
 
         <div class="mr-auto">
-            <form id="contact-form" name="contact-form" action="/add-project" method="POST">
+            <form id="contact-form" name="contact-form" action="/add-project" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row mt-5">
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="date" class="">Date</label>
                             <input type="date" id="date" name="date" class="form-control">
                         </div>
                     </div>
+                    
+                    <div class="col-md-2">
+                        <div class="md-form mb-0">
+                            <label for="my-file" class="">Project File</label>
+                            <input type="file" id="my-file" name="file" class="form-control" multiple>
+                        </div>
+                    </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <div class="md-form">
+                            <label for="name" class="">Project Type</label>
+                        </div>
+                        <select id="cars" class="w-75 h-50 col-md-2" name="pro-type">
+                            <option value="Python">Python</option>
+                            <option value="VBA">VBA</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="Pandas">Pandas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="dev" class="">Developer Name</label>
                             <input type="text" id="dev" name="dev" class="form-control">
                         </div>
                     </div>
-
-                    <div class="col-md-3">
+                    
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="name" class="">Project Name</label>
                             <input type="text" id="name" name="name" class="form-control">
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="md-form mb-0">
                             <label for="pro-description" class="">Project Description</label>
                             <input type="text" id="pro-description" name="pro-description" class="form-control">
                         </div>
                     </div>
-
                 </div>
 
                 <div class="text-center text-md-left mt-5">
@@ -52,23 +70,35 @@
             <table class="table mt-5 table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th class="col-md-2">Date</th>
-                        <th class="col-md-2">First</th>
-                        <th class="col-md-2">Last</th>
-                        <th class="col-md-2">Handle</th>
+                        <th class="col-md-1">Date</th>
+                        <th class="col-md-2">Project File</th>
+                        <th class="col-md-1">Project Type</th>
+                        <th class="col-md-2">Developer Name</th>
+                        <th class="col-md-2">Project Name</th>
+                        <th class="col-md-2">Project Description</th>
                         <th class="col-md-2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for project in projects %}
                     <tr>
-                        <td class="col-md-2">{{project.date}}</td>
+                        <td class="col-md-1">{{project.date}}</td>
+                        <td class="col-md-2">
+                            {% for fl in files %}
+                                {% if project.pro_id == fl.pro_id.pro_id %}
+                                <a name="filename" href="media/{{fl.file}}">{{fl.file}}</a>
+                                <br>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        
+                        <td class="col-md-1">{{project.pro_type}}</td>
                         <td class="col-md-2">{{project.dev_name}}</td>
                         <td class="col-md-2">{{project.pro_name}}</td>
                         <td class="col-md-2">{{project.pro_description}}</td>
                         <td class="col-md-2 mr-auto">
-                            <a href="/open-to-do/{{project.id}}" type="button" class="btn btn-primary">Update</a>
-                            <a href="/delete_to_do/{{project.id}}" type="button" class="btn btn-danger">Delete</a>
+                            <a href="/open-to-do/{{project.pro_id}}" type="button" class="btn btn-primary">Update</a>
+                            <a href="/delete_to_do/{{project.pro_id}}" type="button" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
